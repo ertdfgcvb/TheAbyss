@@ -28,7 +28,7 @@ BackdropPlankton() {
  
 void draw() {
 
-//  background(0);
+  background(0);
   
   //refresh();
  
