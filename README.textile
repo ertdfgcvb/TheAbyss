@@ -1,5 +1,5 @@
 *The Abyss*
-/ A Processing workshop about polymorphism /
+_A Processing workshop about polymorphism_
 
 by
 
