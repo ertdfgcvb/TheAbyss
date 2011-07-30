@@ -22,10 +22,11 @@ class BackdropManager {
    */
 
   private void nextBackDrop() {
-    backdropIndex = ++backdropIndex%3;    
+    backdropIndex = ++backdropIndex%4;    
     if (backdropIndex == 0) currentBackdrop = new BackdropPlain();
     else if (backdropIndex == 1) currentBackdrop = new BackdropFade();
     else if (backdropIndex == 2) currentBackdrop = new BackdropBlue();
+     else if (backdropIndex == 3) currentBackdrop = new BackdropPlankton();
   }
 
   void draw() {

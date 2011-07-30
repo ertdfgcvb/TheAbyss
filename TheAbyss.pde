@@ -28,6 +28,7 @@ import java.lang.reflect.*;
 
 CreatureManager creatureManager;
 BackdropManager backdropManager;
+
 void setup() {
   size(screenWidth, screenHeight, OPENGL);  
   //hint(ENABLE_OPENGL_4X_SMOOTH);
