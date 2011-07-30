@@ -1,0 +1,23 @@
+h1. *The Abyss*
+
+_A Processing workshop about polymorphism_
+
+_by_
+
+*Andreas Gysin*
+2010-2011
+
+h2. Purpose:
+
+The idea behind The Abyss project was to build a system and then let everyone contribute, with a good balance between individual and collaborative work. Students could build new creatures or expand features of the abyss itself. For beginners it was easy enough to contribute with a basic creature, more advanced students could train their graphic skills or even build creatures which interacted with other creatures. After several requests I decided to publish the (far from perfect) source code of The Abyss. I left a few of my own example creatures but student’s creatures are not included as I didn't ask their permission to publish the code.
+
+h3. Creature rules:
+
+* Extend the SuperCreature class and build your own creature.
+* Allowed colors are white with alpha shades. Not a strict rule.
+* Each creature must implement the “move()” and “draw()” methods. (see the SuperCreature class for details).
+* Transforms should use the pos, rot, sca vectors.
+* Animations can be timed with frames or actual time.
+* The name of the new creature class is built with the authors initals and the creature name (not an optimal naming convention but it works with 10-20 people).
+* The .pde file must have the same name of the class (for example: AGCubus.pde).
+* Insert your name, the creature name and the version in the constructor (to do: annotations?).
