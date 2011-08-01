@@ -5,7 +5,7 @@ by
 Andreas Gysin
 2010-2011
 
-h2. Purpose:
+h3. Purpose:
 
 The idea behind The Abyss project was to build a system and then let everyone contribute, with a good balance between individual and collaborative work. Students could build new creatures or expand features of the abyss itself. For beginners it was easy enough to contribute with a basic creature, more advanced students could train their graphic skills or even build creatures which interacted with other creatures. After several requests I decided to publish the (far from perfect) source code of The Abyss. I left a few of my own example creatures but student’s creatures are not included as I didn't ask their permission to publish the code.
 
