@@ -1,7 +1,7 @@
 h1. *The Abyss*
 
-_A Processing workshop about polymorphism_
-_by_
+A Processing workshop about polymorphism
+by
 *Andreas Gysin*
 2010-2011
 
