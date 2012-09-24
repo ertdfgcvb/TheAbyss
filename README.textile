@@ -18,6 +18,6 @@ h3. Creature rules
 * Transforms should use the pos, rot, sca vectors as those are used to track creatures in space.
 * Animations can be timed with frames or actual time.
 * The name of the new creature class is built with the authors initals and the creature name. This is not an optimal naming convention but it works with 10-20 people as each class name must be unique (Steve Zissou + Cubus = SZCubus).
-* The .pde file should have the same name of the class (for example: AGCubus.pde).
+* The .pde file should have the same name of the class (for example: SZCubus.pde).
 * Insert your name, the creature name, the version and the build date in the constructor.
 * Break all rules and build something new.
