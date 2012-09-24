@@ -3,7 +3,7 @@ h1. *The Abyss*
 A Processing workshop about polymorphism
 by
 Andreas Gysin
-2010-2011
+2010-2012
 
 h3. Purpose
 
