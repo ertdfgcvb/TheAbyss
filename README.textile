@@ -18,4 +18,4 @@ h3. Creature rules
 * Animations can be timed with frames or actual time.
 * The name of the new creature class is built with the authors initals and the creature name (not an optimal naming convention but it works with 10-20 people).
 * The .pde file must have the same name of the class (for example: AGCubus.pde).
-* Insert your name, the creature name and the version in the constructor (to do: annotations?).
+* Insert your name, the creature name, the version and the date in the constructor.
