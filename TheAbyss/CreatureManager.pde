@@ -167,13 +167,13 @@ class CreatureManager {
       }
     }
 
-
     //reset camera
     camera();
     hint(DISABLE_DEPTH_TEST);
 
     //info
-    if (previewCreature != null) previewCreature.showInfo();
+    if (previewCreature != null && showAbyssOrigin) previewCreature.showInfo();
+    
     if (showCreatureInfo) {
       for (SuperCreature c : creatures) {      
         if (c != previewCreature) c.showInfo();
@@ -188,9 +188,7 @@ class CreatureManager {
     Iterator<SuperCreature> itr = creatures.iterator();
     while (itr.hasNext ()) {
       SuperCreature c = itr.next();
-      if (c.getEnergy() <= 0) {
-        itr.remove();
-      }
+      if (c.getEnergy() <= 0) itr.remove();
     }
   }
 
@@ -251,6 +249,7 @@ class CreatureManager {
     r.mult(l);
     return r;
   }
+  
   public void toggleManagerInfo() {
     showManagerInfo = !showManagerInfo;
   }

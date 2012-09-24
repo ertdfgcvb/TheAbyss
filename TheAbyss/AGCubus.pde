@@ -28,14 +28,14 @@ class AGCubus extends SuperCreature {
     angRange = random(0.3, 0.6);
   }
 
-  void move() {
+  void move() {    
     pos.x += sin(frameCount*fPos.x);
     pos.y += sin(frameCount*fPos.y);
     pos.z += cos(frameCount*fPos.y);
 
     rot.x = sin(frameCount*fAng.x) * TWO_PI;
     rot.y = sin(frameCount*fAng.y) * TWO_PI;
-    rot.z = sin(frameCount*fAng.z) * TWO_PI;
+    rot.z = sin(frameCount*fAng.z) * TWO_PI; 
   }
 
   void draw() {    

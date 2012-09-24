@@ -35,7 +35,7 @@ void mouseDragged() {
 }
 
 void mousePressed() {
-  creatureManager.cam.setCameraMode(CreatureCamera.DEFAULT_CAM);
+  creatureManager.getCamera().setCameraMode(CreatureCamera.DEFAULT_CAM);
 }
 
 void keyPressed() { 
