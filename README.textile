@@ -12,11 +12,12 @@ A few example creatures are included.
 
 h3. Creature rules
 
-* Extend the SuperCreature class and build your own creature.
+* Extend the supercreature class and build your own creature.
 * Allowed colors are white with alpha shades. Not a strict rule.
-* Each creature must implement the “move()” and “draw()” methods. (see the SuperCreature class for details).
-* Transforms should use the pos, rot, sca vectors.
+* Each creature must implement the move() and draw() methods (see the SuperCreature class for details).
+* Transforms should use the pos, rot, sca vectors as those are used to track creatures in space.
 * Animations can be timed with frames or actual time.
-* The name of the new creature class is built with the authors initals and the creature name (not an optimal naming convention but it works with 10-20 people).
-* The .pde file must have the same name of the class (for example: AGCubus.pde).
-* Insert your name, the creature name, the version and the date in the constructor.
+* The name of the new creature class is built with the authors initals and the creature name. This is not an optimal naming convention but it works with 10-20 people as each class name must be unique (Steve Zissou + Cubus = SZCubus).
+* The .pde file should have the same name of the class (for example: AGCubus.pde).
+* Insert your name, the creature name, the version and the build date in the constructor.
+* Break all rules and build something new.
