@@ -1,7 +1,7 @@
 /**
-The Abyss v.2
-2012
-*/
+ * The Abyss
+ * 2012
+ */
 
 import processing.opengl.*;
 import java.lang.reflect.*;

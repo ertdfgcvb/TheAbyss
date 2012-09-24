@@ -1,6 +1,6 @@
 /**
- * A creature wich uses a matrix for positioning
- * this allows a plane like movement
+ * A creature wich uses matrix transforms for positioning.
+ * This allows a plane-like movement.
  */
 class AGSnakeFish extends SuperCreature {
 

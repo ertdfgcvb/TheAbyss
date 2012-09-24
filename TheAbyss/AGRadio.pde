@@ -1,16 +1,19 @@
+/**
+ * An attempt of a radiolaria-like creature.
+ * Uses vertex colors for gradients.
+ */
 class AGRadio extends SuperCreature {
 
   PVector pVel, rVel;
   int num, spikes;
   float freq;
-  float rad, rFact; //external radius
+  float rad, rFact;
 
   public AGRadio() {
     creatureAuthor  = "Andreas Gysin";
     creatureName    = "Radio";
     creatureVersion = "Alpha";
     setDate(2012, 7, 27); //Y,M,D
-
 
     pVel = new PVector( random(-1, 1), random(-1, 1), random(-1, 1) );
     rVel = new PVector( random(-0.01, 0.01), random(-0.01, 0.01), random(-0.01, 0.01) );
@@ -31,7 +34,7 @@ class AGRadio extends SuperCreature {
     stroke(255);
     noFill();
     noStroke();
-    hint(DISABLE_DEPTH_TEST); 
+    //hint(DISABLE_DEPTH_TEST); 
     float arc = TWO_PI / num;    
     float f = frameCount * freq;
     float a = arc * spikes;
@@ -50,7 +53,7 @@ class AGRadio extends SuperCreature {
       vertex(x, y, 0);
     }
     endShape();
-    hint(ENABLE_DEPTH_TEST);
+    //hint(ENABLE_DEPTH_TEST);
   }
 }
 

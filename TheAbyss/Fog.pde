@@ -1,9 +1,7 @@
 /**
-Fog
-Hardware OpenGL linear fog.
-This implementation works actually only on Processing 1.5
-After release 2 the best solution would be to use a shader.
-*/
+ * An OpenGL fog wrapper.
+ * This implementation works only until Processing 1.5.1
+ */
 import javax.media.opengl.GL;
 import java.nio.FloatBuffer;
 

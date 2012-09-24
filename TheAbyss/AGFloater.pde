@@ -1,3 +1,7 @@
+/**
+ * A floating fish.
+ * Position is calculated with Perlin noise.
+ */
 class AGFloater extends SuperCreature {
 
   PMatrix3D mat;

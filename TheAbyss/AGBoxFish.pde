@@ -1,5 +1,8 @@
+/**
+ * A simple box-like fish.
+ * Just swims around following it's heartbeat.
+ */
 class AGBoxFish extends SuperCreature {
-
   PMatrix3D mat;
   PVector dimBox, dimR, dimF;
   float fF, fR, aF, aR, fRot, aRot;

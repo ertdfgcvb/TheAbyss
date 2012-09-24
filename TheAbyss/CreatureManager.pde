@@ -1,3 +1,7 @@
+/**
+ * The core class.
+ * Takes care of instantiating creatures and makes them live and die.
+ */
 class CreatureManager {
   private ArrayList<SuperCreature>creatures;
   private ArrayList<Class>creatureClasses;
@@ -41,7 +45,7 @@ class CreatureManager {
         int n = creatureClasses.size()-1;
         String numb = str(n);
         if (n < 10) numb = " " + n;
-        infoText += numb + "       " + c[i].getSimpleName() + "\n";
+        infoText += numb + "         " + c[i].getSimpleName() + "\n";
       }
     }
     println(infoText);
@@ -62,8 +66,8 @@ class CreatureManager {
     s += "fps        " + round(frameRate) + "\n";
     s += "num        " + creatures.size() + "\n";
     s += "------------------------------------\n";
-    //s += infoText;
-    //s += "------------------------------------\n";
+    s += infoText;
+    s += "------------------------------------\n";
     s += "left/right next/prev creature\n";   
     s += "space      add current creature\n";   
     s += "up/down    next/prev creature cam\n";   

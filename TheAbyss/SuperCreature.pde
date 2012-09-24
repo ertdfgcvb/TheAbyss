@@ -1,3 +1,7 @@
+/**
+ * The SuperCreature class
+ * Every creature will extend this class.
+ */
 abstract class SuperCreature {
   protected PVector pos, rot, sca;
   private PVector projectedPos;
@@ -27,7 +31,7 @@ abstract class SuperCreature {
   abstract void move();
   abstract void draw();
 
-  //applyes the default transforms... can be used or managed "by hand" 
+  //applies the default transforms... can be used as a shortcut
   void applyTransforms() {
     translate(pos.x, pos.y, pos.z);
     rotateX(rot.x);
@@ -110,7 +114,7 @@ abstract class SuperCreature {
   }
 
   void showInfo() {
-    if (cm.getCamera().eyeDist(pos) < 1000) {
+    if (cm.getCamera().eyeDist(pos) < 1200) {
       pushStyle();
       fill(255);
       stroke(255);
@@ -149,7 +153,7 @@ abstract class SuperCreature {
    rot.z += (rz - rot.z) * damp;    
    }
    */
-
+    
   float getEnergy() {
     return energy;
   }

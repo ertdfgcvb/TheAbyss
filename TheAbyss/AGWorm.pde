@@ -1,6 +1,6 @@
 /**
- * An example creature with simple spring and node classes
- *
+ * An example creature with simple spring and node classes.
+ * Moves randomly trough the deep waters in search for meaning.
  */
 class AGWorm extends SuperCreature {
   ArrayList<Node> nodes;

@@ -1,3 +1,7 @@
+/**
+ * A simple camera class.
+ * And its Creature Camera extension.
+ */
 class Camera {
   PVector eye, lookAt, up;
   private float fov = PI/3;
