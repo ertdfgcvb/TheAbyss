@@ -6,7 +6,7 @@
 import processing.opengl.*;
 import java.lang.reflect.*;
 
-// fog and backdrop could be integrated in the creaturemanager... 
+// Fog and backdrop could be integrated in the creaturemanager... 
 // but it's also ok to keep the "decorations" outside of it.
 Fog fog; 
 CreatureManager creatureManager;
