@@ -2,6 +2,10 @@
  * The core class.
  * Takes care of instantiating creatures and makes them live and die.
  */
+
+import java.util.Iterator;
+import java.lang.reflect.*; 
+
 class CreatureManager {
   private ArrayList<SuperCreature>creatures;
   private ArrayList<Class>creatureClasses;
@@ -26,42 +30,46 @@ class CreatureManager {
     textFont(fnt);
     textLeading(17);
     this.parent = parent;
-    releasePoint = getRandomVect();
+    releasePoint = PVector.random3D();
+    releasePoint.mult(100);
     creatures = new ArrayList<SuperCreature>();
     cam = new CreatureCamera();
-    cam.eye.z = 50;
-    scanClasses();
+    //cam.eye.z = 50;
+    creatureClasses = scanClasses(parent, "SuperCreature");
+    if (creatureClasses.size() > 0) selectNextCreature();
   }
 
-  //reflexion
-  private void scanClasses() {
-    println("--- SCANNING CREATURE CLASSES ---");
-    creatureClasses = new ArrayList<Class>();
+  private ArrayList<Class> scanClasses(PApplet parent, String superClassName) {
+    ArrayList<Class> classes = new ArrayList<Class>();  
     infoText = "";
     Class[] c = parent.getClass().getDeclaredClasses();
     for (int i=0; i<c.length; i++) {
-      if (c[i].getSuperclass() != null && (c[i].getSuperclass().getSimpleName().equals("SuperCreature") )) {
-        creatureClasses.add(c[i]);
-        int n = creatureClasses.size()-1;
+      if (c[i].getSuperclass() != null && (c[i].getSuperclass().getSimpleName().equals(superClassName) )) {
+        classes.add(c[i]);
+        int n = classes.size()-1;
         String numb = str(n);
         if (n < 10) numb = " " + n;
         infoText += numb + "         " + c[i].getSimpleName() + "\n";
       }
     }
+    println("------------------------------------------------------");
+    println("Classes which extend " + superClassName + ":");  
     println(infoText);
+    return classes;
   }
+
   public void showCreatureInfo() {
     for (SuperCreature c : creatures) {
-      c.showInfo();
+      c.drawInfo();
     }
   }
 
-  public void showInfo() {
+  public void showInfo(PGraphics g) {
     fill(255);
     noStroke();
     String s = "";
-    s += "           the abyss v.2\n";
-    s += "           2012\n";
+    s += "           the abyss v.2.1\n";
+    s += "           2010-2013\n";
     s += "------------------------------------\n";
     s += "fps        " + round(frameRate) + "\n";
     s += "num        " + creatures.size() + "\n";
@@ -71,7 +79,7 @@ class CreatureManager {
     s += "left/right next/prev creature\n";   
     s += "space      add current creature\n";   
     s += "up/down    next/prev creature cam\n";   
-    s += "return     current creature cam\n";
+    s += "c          auto rotate cam\n";
     s += "           \n";
     s += "r          add random creature\n";
     s += "h          toggle help\n";
@@ -108,7 +116,8 @@ class CreatureManager {
     } 
 
     if (f != null) {
-      releasePoint = getRandomVect();
+      releasePoint = PVector.random3D();
+      releasePoint.mult(100);
       addCreature(f);
     }
     return f;
@@ -132,6 +141,17 @@ class CreatureManager {
 
   void killAll() {
     creatures.clear();
+    // TODO:
+    // the previewCreature needs to get out from the main array 
+    // to avoid code like this:
+    currentCreature--;
+    selectNextCreature();
+
+    // TODO:
+    // the cam should get out of the CreatureManager
+    cam.setCameraMode(CreatureCamera.DEFAULT_CAM);
+    cam.setAngle(HALF_PI * floor(random(4)));
+    cam.setRadius(1000);
   }
 
   void killCreatureByName(String creatureName) {
@@ -141,29 +161,34 @@ class CreatureManager {
     }
   }
 
-  void draw() {
+  void loop() {
     hint(ENABLE_DEPTH_TEST);
     cam.apply();
-
     if (showAbyssOrigin) {
       noFill();
       stroke(255, 0, 0);
       box(200, 200, 200);
     }
-
-    if (previewCreature != null) previewCreature.setPos(releasePoint);
-
+    if (previewCreature != null) {
+      previewCreature.setPos(releasePoint);
+      previewCreature.energy = 100.0;
+    }
     for (SuperCreature c : creatures) {      
       c.preDraw();
-      c.move();
+      c.move();      
       c.draw();
       c.postDraw();
     }
-    
+    drawOverlays();
+
+    cleanUp();
+  }
+
+  void drawOverlays() {
     //separated from the main draw loop
     if (showCreatureAxis) {
       for (SuperCreature c : creatures) {  
-        c.showAxis();
+        c.drawAxis();
       }
     }
 
@@ -172,18 +197,20 @@ class CreatureManager {
     hint(DISABLE_DEPTH_TEST);
 
     //info
-    if (previewCreature != null && showAbyssOrigin) previewCreature.showInfo();
-    
+    if (previewCreature != null && showAbyssOrigin) previewCreature.drawInfo();
+
     if (showCreatureInfo) {
       for (SuperCreature c : creatures) {      
-        if (c != previewCreature) c.showInfo();
+        if (c != previewCreature) c.drawInfo();
       }
     }
 
     if (showManagerInfo) {
-      showInfo();
+      showInfo(g);
     }
+  }
 
+  void cleanUp() {
     //remove dead cratures
     Iterator<SuperCreature> itr = creatures.iterator();
     while (itr.hasNext ()) {
@@ -231,25 +258,20 @@ class CreatureManager {
   }
 
   public void selectNextCreature() {
-    currentCreature++;
-    if (currentCreature == creatureClasses.size()) currentCreature = -1;
-    setCurrentCreature(currentCreature);
+    if (creatureClasses.size() > 0) {
+      currentCreature = ++currentCreature % creatureClasses.size();     
+      setCurrentCreature(currentCreature);
+    }
   }
 
   public void selectPrevCreature() {
-    currentCreature--;
-    if (currentCreature < -1) currentCreature = creatureClasses.size()-1;
-    setCurrentCreature(currentCreature);
+    if (creatureClasses.size() > 0) {
+      currentCreature--;
+      if (currentCreature < 0) currentCreature = creatureClasses.size()-1;
+      setCurrentCreature(currentCreature);
+    }
   }
 
-  private PVector getRandomVect() {
-    float l = random(100);
-    PVector r = new PVector(random(-1, 1), random(-1, 1), random(-1, 1));
-    r.normalize();
-    r.mult(l);
-    return r;
-  }
-  
   public void toggleManagerInfo() {
     showManagerInfo = !showManagerInfo;
   }
@@ -266,6 +288,17 @@ class CreatureManager {
     showCreatureAxis = !showCreatureAxis;
   }
 
+  CreatureCamera getCamera() {
+    return cam;
+  }
+
+  public void currentCameraCreature() {
+    if (previewCreature != null) {
+      cam.setTargetCreature(previewCreature);
+      cam.setCameraMode(CreatureCamera.CREATURE_CAM);
+    }
+  }
+
   public void prevCameraCreature() {
     if (creatures.size() > 0) {
       currentCameraCreature--;
@@ -279,16 +312,6 @@ class CreatureManager {
     }
   }
 
-  CreatureCamera getCamera() {
-    return cam;
-  }
-
-  public void currentCameraCreature() {
-    if (previewCreature != null) {
-      cam.setTargetCreature(previewCreature);
-      cam.setCameraMode(CreatureCamera.CREATURE_CAM);
-    }
-  }
 
   public void nextCameraCreature() {
     if (creatures.size() > 0) {

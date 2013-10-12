@@ -43,24 +43,24 @@ class Camera {
     camera(eye.x, eye.y, eye.z, lookAt.x, lookAt.y, lookAt.z, up.x, up.y, up.z);
   }
 
-  void affiche() {
+  void debug() {
     sphereDetail(10);
 
     //eye
-    g.pushMatrix();
-    g.translate(eye.x, eye.y, eye.z);
+    pushMatrix();
+    translate(eye.x, eye.y, eye.z);
     noStroke();
     fill(0);
     sphere(10);
-    g.popMatrix();
+    popMatrix();
 
     //lookAt
-    g.pushMatrix();
-    g.translate(lookAt.x, lookAt.y, lookAt.z);
+    pushMatrix();
+    translate(lookAt.x, lookAt.y, lookAt.z);
     noStroke();
     fill(0);
     sphere(5);
-    g.popMatrix();
+    popMatrix();
 
     stroke(0);
     line(eye.x, eye.y, eye.z, lookAt.x, lookAt.y, lookAt.z);
@@ -68,32 +68,57 @@ class Camera {
 }
 
 class CreatureCamera extends Camera {
-  final static int DEFAULT_CAM = 0;
-  final static int CREATURE_CAM = 1;
+  final static int DEFAULT_CAM    = 0;
+  final static int CREATURE_CAM   = 1;
+  final static int AUTOROTATE_CAM = 2;
+
   int cameraMode = DEFAULT_CAM;
   float eyeDamp = 0.1;
-  float lookAtDamp = 0.1;
-  PVector cameraControl;
+  float lookAtDamp = 0.1;  
   SuperCreature targetCreature;
   PVector dLookAt, dEye;
   float creatureDist = 500;
+  float angle, radius;
 
   CreatureCamera() {
     super(); 
     dLookAt = lookAt.get();
-    dEye = eye.get();
-    cameraControl = new PVector(0, 1000, 0);
+    dEye = eye.get();    
+    setRadius(1000);
+    setAngle(0);
+  }
+
+  float getAngle() {
+    return angle;
+  }
+
+  void setAngle(float a) {
+    angle = a;
+    dEye.x = dLookAt.x + sin(angle) * radius;
+    dEye.z = dLookAt.y + cos(angle) * radius;
+  }
+
+  void setRadius(float r) {
+    radius = r;
+    dEye.x = dLookAt.x + sin(angle) * radius;
+    dEye.z = dLookAt.y + cos(angle) * radius;
   }
 
   void apply() {
-    if (targetCreature == null || targetCreature.getEnergy() <= 0) cameraMode = DEFAULT_CAM;
-    if (cameraMode == DEFAULT_CAM) {
-      dLookAt.set(0, 0, 0);
-      float r = cameraControl.y;
-      float x = cos(frameCount * 0.001 + cameraControl.x) * r ;
+    if (targetCreature == null || targetCreature.getEnergy() <= 0) {
+      cameraMode = DEFAULT_CAM;
+    }
+    
+    if (cameraMode == DEFAULT_CAM || cameraMode == AUTOROTATE_CAM) {      
+      if ( cameraMode == AUTOROTATE_CAM) {
+        angle += 0.007;
+      }
+      // some extra floating motion:
+      float x = cos(frameCount * 0.001 + angle) * radius;
       float y = sin(frameCount * 0.004) * 200;
-      float z = sin(frameCount * 0.001 + cameraControl.x) * r;    
+      float z = sin(frameCount * 0.001 + angle) * radius;    
       dEye.set(x, y, z);
+      dLookAt.set(0, 0, 0);
     } 
     else if (cameraMode == CREATURE_CAM) {
       dLookAt.set(targetCreature.getPos());      
@@ -113,15 +138,6 @@ class CreatureCamera extends Camera {
   void setCameraMode(int mode) {
     cameraMode = mode;
   }
-  
-  PVector getCameraControl(){
-    return cameraControl.get();
-  }
-
-  void setCameraControl(PVector v){
-    cameraControl = v.get();
-  }
-  
 
   void interpolate() {
     lookAt.x += (dLookAt.x - lookAt.x) * lookAtDamp;
@@ -131,9 +147,9 @@ class CreatureCamera extends Camera {
     eye.y += (dEye.y - eye.y) * eyeDamp;
     eye.z += (dEye.z - eye.z) * eyeDamp;
   }
-  
-  float eyeDist(PVector v){
+
+  float eyeDist(PVector v) {
     return dist(eye.x, eye.y, eye.z, v.x, v.y, v.z);
-  } 
+  }
 }
 

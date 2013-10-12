@@ -17,7 +17,7 @@ class AGBoxFish extends SuperCreature {
 
     mat = new PMatrix3D();
     mat.rotateY(random(TWO_PI));
-    mat.rotateZ(random(-0.1,0.1));
+    mat.rotateZ(random(-0.1, 0.1));
 
     dimR = new PVector(random(10, 30), random(10, 30));
     dimF = new PVector(random(5, 50), random(5, 20));
@@ -30,7 +30,6 @@ class AGBoxFish extends SuperCreature {
     aRot = random(0.02, 0.05);
     spd = fRot * 10;
     eye = random(1, 3);
-
   }
 
   void move() {
@@ -52,19 +51,19 @@ class AGBoxFish extends SuperCreature {
   void draw() {
     applyMatrix(mat);
     pushMatrix();
-
+    sphereDetail(5);
     scale(min(getEnergy() * 0.1, 1)); //it's possible to animate a dying creature...
     translate(dimBox.x/4, 0, 0);
     float f = sin(frameCount * fF) * aF;  
     float r = sin(frameCount * fR) * aR;
-    float h = sin(frameCount * fF * 0.5 + aF);
-    float a = map(h, -1, 1, 20, 100);  
-    sphereDetail(5);
-    noStroke();
-    fill(255, 0, 0, a);
-    float hr = dimBox.z * 0.15 + h * dimBox.z * 0.03;
-    sphere(hr/2);
-    sphere(hr);
+    //float h = sin(frameCount * fF * 0.5 + aF);
+    //float a = map(h, -1, 1, 20, 100);  
+
+    //noStroke();
+    //fill(255,0,0 a);
+    //float hr = dimBox.z * 0.15 + h * dimBox.z * 0.03;
+    //sphere(hr/2);
+    //sphere(hr);
 
     stroke(255);
     noFill();
@@ -95,7 +94,7 @@ class AGBoxFish extends SuperCreature {
     rotateY(-r);
     rect(0, 0, dimR.x, dimR.y);
     popMatrix();
-    
+
     noStroke();
     fill(255);
     pushMatrix();

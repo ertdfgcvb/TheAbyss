@@ -96,7 +96,7 @@ abstract class SuperCreature {
     return nearest;
   }
 
-  void showAxis() {
+  void drawAxis() {
     pushMatrix();
     translate(pos.x, pos.y, pos.z);   
     rotateX(rot.x);
@@ -113,7 +113,7 @@ abstract class SuperCreature {
     popMatrix();
   }
 
-  void showInfo() {
+  void drawInfo() {
     if (cm.getCamera().eyeDist(pos) < 1200) {
       pushStyle();
       fill(255);
@@ -131,7 +131,7 @@ abstract class SuperCreature {
   }
   /*
   //not working well, yet... quats needed.
-  void lookAt(PVector p) {
+   void lookAt(PVector p) {
    lookAt(p, 1.0);
    }
    
@@ -153,7 +153,7 @@ abstract class SuperCreature {
    rot.z += (rz - rot.z) * damp;    
    }
    */
-    
+
   float getEnergy() {
     return energy;
   }
@@ -165,8 +165,8 @@ abstract class SuperCreature {
   void setDate(int y, int m, int d) {
     creatureDate.set(y, m, d);
   }
-  
-  //just a trivial date object
+
+  //just date object
   class CreatureDate {
     int y, d, m; 
 

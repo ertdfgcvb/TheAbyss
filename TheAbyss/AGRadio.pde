@@ -34,7 +34,7 @@ class AGRadio extends SuperCreature {
     stroke(255);
     noFill();
     noStroke();
-    //hint(DISABLE_DEPTH_TEST); 
+    hint(DISABLE_DEPTH_TEST); 
     float arc = TWO_PI / num;    
     float f = frameCount * freq;
     float a = arc * spikes;
@@ -47,13 +47,13 @@ class AGRadio extends SuperCreature {
       float x = c * (rad + len * rad);
       float y = s * (rad + len * rad);
       float z = len * rad;
-      fill(255  ); 
+      fill(255, i % 2 * 255  ); 
       vertex(x*rFact, y*rFact, z);
-      fill(i % 2 * 255, 0); 
+      fill(255, 0); 
       vertex(x, y, 0);
     }
     endShape();
-    //hint(ENABLE_DEPTH_TEST);
+    hint(ENABLE_DEPTH_TEST);
   }
 }
 
