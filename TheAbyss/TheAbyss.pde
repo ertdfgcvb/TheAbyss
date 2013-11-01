@@ -14,6 +14,8 @@ void setup() {
   // creatureManager.toggleManagerInfo(); // turn info off
 
   initShaders();
+  //camera
+  cameraSetup() ;
 } 
 
 void draw() { 
@@ -24,10 +26,21 @@ void draw() {
   }
 
   background(0);
+  
+  
+  //
   if (useBackdrop) drawBackdrop();
   creatureManager.loop();
+  //
+  endCamera() ;
+  
 }
 
+void mouseWheel(MouseEvent event)
+{
+  zoomCamera(event) ;
+}
+/*
 void mouseDragged() {
   CreatureCamera cam = creatureManager.getCamera();
   float ang = cam.getAngle() + (pmouseX - mouseX) * 0.006;
@@ -35,11 +48,12 @@ void mouseDragged() {
   cam.setAngle(ang);
   cam.setRadius(rad);
 }
-
+*/
+/*
 void mousePressed() {
   creatureManager.getCamera().setCameraMode(CreatureCamera.DEFAULT_CAM);
 }
-
+*/
 void keyReleased() {
   if (keyCode == RIGHT)      creatureManager.selectNextCreature();
   else if (keyCode == LEFT)  creatureManager.selectPrevCreature();
@@ -54,9 +68,11 @@ void keyReleased() {
   else if (key == 'x')       creatureManager.killAll();
   else if (key == 's')       capture();  
   else if (key == 'c')       {
+    /*
     CreatureCamera cam = creatureManager.getCamera();  
     cam.setCameraMode(CreatureCamera.AUTOROTATE_CAM);
     cam.setRadius(3000);
+    */
   }
 }
 
@@ -110,4 +126,3 @@ void initShaders() {
 void capture() {
   save("snaps/" + System.currentTimeMillis() + ".png");
 }
-
