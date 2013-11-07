@@ -3,7 +3,7 @@ TheAbyss by Andreas Gysin
 
 A Processing sketch about polymorphism used for a workshop.
 
-Stan the Man modification !
+Stan le Punk modification !
 ===========================
 Few updates
 New camera
