@@ -33,9 +33,9 @@ class EPSeaFly extends SuperCreature {
     applyTransforms();
   }
 
-  void draw() {
+  void draw(color colorCreature) {
 
-    stroke(255);
+    stroke(colorCreature);
     noFill();  
     float dimR = 20;
     float dimF = 10;  
@@ -45,7 +45,7 @@ class EPSeaFly extends SuperCreature {
     rotateX(count * 0.008);
 
     PVector dim = new PVector(100, 60, 30);
-    fill(255);
+    fill(colorCreature);
     sphereDetail(3); 
     sphere(25);
 
@@ -56,7 +56,7 @@ class EPSeaFly extends SuperCreature {
     translate(-dim.x/2, dim.y/2, dim.z/2);
     rotateZ(aF/2 + 1.2);
     rotateY(aF - 1);
-    fill(255,150);
+    fill(colorCreature,150);
     quad(0, 0, 86, 20, 69, 63, 30, 76);
     noFill();
     quad(0, 0, 96, 23, 79, 73, 40, 86);
@@ -66,7 +66,7 @@ class EPSeaFly extends SuperCreature {
     translate(-dim.x/2, dim.y/2, -dim.z/2);
     rotateZ(aF/2 + 1.2);
     rotateY(-aF + 1);
-    fill(255,150);
+    fill(colorCreature,150);
     quad(0, 0, 86, 20, 69, 63, 30, 76);
     noFill();
     quad(0, 0, 96, 23, 79, 73, 40, 86);
@@ -89,4 +89,3 @@ class EPSeaFly extends SuperCreature {
     popMatrix();
   }
 }
-

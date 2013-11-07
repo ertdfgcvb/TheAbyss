@@ -9,7 +9,6 @@ import java.lang.reflect.*;
 class CreatureManager {
   private ArrayList<SuperCreature>creatures;
   private ArrayList<Class>creatureClasses;
-  private CreatureCamera cam;
 
   int currentCameraCreature =-1;
   PVector releasePoint;
@@ -33,8 +32,7 @@ class CreatureManager {
     releasePoint = PVector.random3D();
     releasePoint.mult(100);
     creatures = new ArrayList<SuperCreature>();
-    cam = new CreatureCamera();
-    //cam.eye.z = 50;
+
     creatureClasses = scanClasses(parent, "SuperCreature");
     if (creatureClasses.size() > 0) selectNextCreature();
   }
@@ -60,7 +58,7 @@ class CreatureManager {
 
   public void showCreatureInfo() {
     for (SuperCreature c : creatures) {
-      c.drawInfo();
+      c.drawInfo(c.getPos());
     }
   }
 
@@ -146,12 +144,6 @@ class CreatureManager {
     // to avoid code like this:
     currentCreature--;
     selectNextCreature();
-
-    // TODO:
-    // the cam should get out of the CreatureManager
-    cam.setCameraMode(CreatureCamera.DEFAULT_CAM);
-    cam.setAngle(HALF_PI * floor(random(4)));
-    cam.setRadius(1000);
   }
 
   void killCreatureByName(String creatureName) {
@@ -161,25 +153,32 @@ class CreatureManager {
     }
   }
 
-  void loop() {
-    hint(ENABLE_DEPTH_TEST);
-    cam.apply();
+  void loop(color colorCreature) {
+
+    
+    
+    
     if (showAbyssOrigin) {
       noFill();
       stroke(255, 0, 0);
-      box(200, 200, 200);
+      repere(200) ;
     }
     if (previewCreature != null) {
       previewCreature.setPos(releasePoint);
-      previewCreature.energy = 100.0;
+      previewCreature.energy = 10.0;
     }
-    for (SuperCreature c : creatures) {      
+    for (SuperCreature c : creatures) {
+      //println(c.creatureName + " " + c.getPos()) ;      
       c.preDraw();
       c.move();      
-      c.draw();
+      c.draw(colorCreature);
       c.postDraw();
     }
+    
+
+    
     drawOverlays();
+
 
     cleanUp();
   }
@@ -191,17 +190,18 @@ class CreatureManager {
         c.drawAxis();
       }
     }
-
+    
     //reset camera
-    camera();
-    hint(DISABLE_DEPTH_TEST);
+    //cameraDraw() ;
+    
 
     //info
-    if (previewCreature != null && showAbyssOrigin) previewCreature.drawInfo();
+    if (previewCreature != null && showAbyssOrigin) for (SuperCreature c : creatures) previewCreature.drawInfo(c.getPos());
 
     if (showCreatureInfo) {
-      for (SuperCreature c : creatures) {      
-        if (c != previewCreature) c.drawInfo();
+      for (SuperCreature c : creatures) {
+        //c.getPos() ;      
+        if (c != previewCreature) c.drawInfo(c.getPos());
       }
     }
 
@@ -288,41 +288,29 @@ class CreatureManager {
     showCreatureAxis = !showCreatureAxis;
   }
 
-  CreatureCamera getCamera() {
-    return cam;
-  }
-
-  public void currentCameraCreature() {
-    if (previewCreature != null) {
-      cam.setTargetCreature(previewCreature);
-      cam.setCameraMode(CreatureCamera.CREATURE_CAM);
-    }
-  }
-
   public void prevCameraCreature() {
     if (creatures.size() > 0) {
+      
       currentCameraCreature--;
+      //security for the arraylist !
       if (currentCameraCreature < 0) currentCameraCreature = creatures.size()-1;
-      cam.setTargetCreature(creatures.get(currentCameraCreature));
-      cam.setCameraMode(CreatureCamera.CREATURE_CAM);
-    } 
-    else {
+      newTarget = creatures.get(currentCameraCreature).getPos() ;
+      initFollow(newTarget, getEyeCamera()) ;
+    } else {
       currentCameraCreature = -1;
-      cam.setCameraMode(CreatureCamera.DEFAULT_CAM);
     }
   }
 
 
   public void nextCameraCreature() {
     if (creatures.size() > 0) {
+      
       currentCameraCreature = ++currentCameraCreature % creatures.size();
-      cam.setTargetCreature(creatures.get(currentCameraCreature));
-      cam.setCameraMode(CreatureCamera.CREATURE_CAM);
+      newTarget = creatures.get(currentCameraCreature).getPos() ;
+      initFollow(newTarget, getEyeCamera()) ;
     } 
     else {
       currentCameraCreature = -1;
-      cam.setCameraMode(CreatureCamera.DEFAULT_CAM);
     }
   }
 }
-

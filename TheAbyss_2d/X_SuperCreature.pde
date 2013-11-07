@@ -5,7 +5,8 @@
 abstract class SuperCreature {
   protected PVector pos, rot, sca;
   private PVector projectedPos;
-  private float energy, power;
+  public float energy ; 
+  private float power;
   String creatureName, creatureAuthor, creatureVersion;
   CreatureDate creatureDate;
   CreatureManager cm;
@@ -16,7 +17,7 @@ abstract class SuperCreature {
     creatureVersion = "Alpha";
     creatureDate = new CreatureDate(); 
 
-    energy = 100.0;
+    //energy = 100.0;
     power = 0.02;
     pos = new PVector();
     projectedPos = new PVector();
@@ -29,7 +30,7 @@ abstract class SuperCreature {
   }
 
   abstract void move();
-  abstract void draw();
+  abstract void draw(color c);
 
   //applies the default transforms... can be used as a shortcut
   void applyTransforms() {
@@ -114,45 +115,21 @@ abstract class SuperCreature {
   }
 
   void drawInfo() {
-    if (cm.getCamera().eyeDist(pos) < 1200) {
-      pushStyle();
-      fill(255);
-      stroke(255);
-      float x = projectedPos.x;
-      float y = projectedPos.y;
-      ellipse(x, y, 6, 6);
-      line(x, y, x+70, y-70);
-      String s = creatureName + "\n" + creatureAuthor + "\n" + creatureVersion + "\n";
-      s += creatureDate + "\n";
-      s += "energy: " + nf(energy, 0, 1);
-      text(s, x+70, y-70);
-      popStyle();
-    }
+    pushStyle();
+    fill(255);
+    stroke(255);
+    float x = projectedPos.x;
+    float y = projectedPos.y;
+    ellipse(x, y, 6, 6);
+    line(x, y, x+70, y-70);
+    String s = creatureName + "\n" + creatureAuthor + "\n" + creatureVersion + "\n";
+    s += creatureDate + "\n";
+    s += "energy: " + nf(energy, 0, 1);
+    text(s, x+70, y-70);
+    popStyle();
   }
-  /*
-  //not working well, yet... quats needed.
-   void lookAt(PVector p) {
-   lookAt(p, 1.0);
-   }
-   
-   void lookAt(PVector target, float damp) {
-   
-   PVector p = PVector.sub(target, pos);
-   float dy = p.mag();
-   float dz = sqrt(p.x*p.x + p.y*p.y);
-   float ry = acos(p.z/dy);
-   float rz;
-   if (p.y >= 0) {
-   rz = acos(p.x/dz);
-   } 
-   else {
-   rz = TWO_PI - acos(p.x/dz);
-   }
-   rot.x += (0  - rot.x) * damp;
-   rot.y += (ry - rot.y) * damp;
-   rot.z += (rz - rot.z) * damp;    
-   }
-   */
+
+
 
   float getEnergy() {
     return energy;
@@ -191,4 +168,3 @@ abstract class SuperCreature {
     }
   }
 }
-

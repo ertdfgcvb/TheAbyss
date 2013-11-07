@@ -14,6 +14,7 @@ class AGBoxFish extends SuperCreature {
     creatureName    = "BoxFish";
     creatureVersion = "Beta";
     setDate(2012, 4, 26); //Y,M,D
+    //energy = 0 ;
 
     mat = new PMatrix3D();
     mat.rotateY(random(TWO_PI));
@@ -33,6 +34,7 @@ class AGBoxFish extends SuperCreature {
   }
 
   void move() {
+    println(energy) ;
     float s = sin(frameCount * fRot);
     mat.rotateY(s * aRot + (noise(pos.z * 0.01, frameCount * 0.01) -0.5) * 0.1);
     mat.rotateZ(s * aRot * 0.3);
@@ -48,7 +50,7 @@ class AGBoxFish extends SuperCreature {
     mat.set(a);
   }
 
-  void draw() {
+  void draw(color colorCreature) {
     applyMatrix(mat);
     pushMatrix();
     sphereDetail(5);
@@ -65,7 +67,7 @@ class AGBoxFish extends SuperCreature {
     //sphere(hr/2);
     //sphere(hr);
 
-    stroke(255);
+    stroke(colorCreature);
     noFill();
     box(dimBox.x, dimBox.y, dimBox.z);
 
@@ -96,7 +98,7 @@ class AGBoxFish extends SuperCreature {
     popMatrix();
 
     noStroke();
-    fill(255);
+    fill(colorCreature);
     pushMatrix();
     translate(-dimBox.x/2 + eye, dimBox.y/3, -dimBox.z/2);
     sphere(eye);
@@ -107,4 +109,3 @@ class AGBoxFish extends SuperCreature {
     popMatrix();
   }
 }
-

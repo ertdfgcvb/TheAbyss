@@ -38,7 +38,7 @@ class AGCubus extends SuperCreature {
     rot.z = sin(frameCount*fAng.z) * TWO_PI; 
   }
 
-  void draw() {    
+  void draw(color colorCreature) {    
     applyTransforms(); //shortcut   
     noFill();
     stroke(255);
@@ -74,4 +74,3 @@ class AGCubus extends SuperCreature {
     return new PVector(v.x*c - v.y*s, v.x*s + v.y*c);
   }    
 }
-

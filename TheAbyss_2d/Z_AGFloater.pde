@@ -53,7 +53,7 @@ class AGFloater extends SuperCreature {
     mat.set(a);
   }
 
-  void draw() {
+  void draw(color colorCreature) {
     applyMatrix(mat);
     //stroke(255);
     noStroke();
@@ -82,4 +82,3 @@ class AGFloater extends SuperCreature {
     popMatrix();
   }
 }
-

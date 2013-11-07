@@ -41,7 +41,7 @@ class PXPSonar extends SuperCreature {
     applyTransforms();
   }
 
-  void draw() {
+  void draw(color colorCreature) {
     time++;
     count++;
     float changeWH;
@@ -51,7 +51,7 @@ class PXPSonar extends SuperCreature {
     noFill();
     for (int i = 0; i < bold; i++) { 
       changeAL = (freq-time*fadeSpeed)*(sin((PI/bold)*i));
-      stroke(255, 255, 255, changeAL*2);
+      stroke(colorCreature, changeAL*2);
       changeWH = exp(sqrt(time*0.75))+i;
       ellipse (0, 0, changeWH, changeWH);
     }
@@ -72,4 +72,3 @@ class PXPSonar extends SuperCreature {
     sphere(10);
   }
 }
-

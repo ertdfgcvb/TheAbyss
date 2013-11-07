@@ -49,9 +49,9 @@ class MFCreatureZero extends SuperCreature {
     pos.z += (dest.z - pos.z) * 0.02;
   }
 
-  void draw() {
+  void draw(color colorCreature) {
     hint(DISABLE_DEPTH_TEST); 
-    stroke(255, 95);
+    stroke(colorCreature, 95);
     strokeWeight(2);
     noFill();
     translate(pos.x, pos.y, pos.z);
@@ -83,4 +83,3 @@ class MFCreatureZero extends SuperCreature {
     hint(ENABLE_DEPTH_TEST);
   }
 }
-

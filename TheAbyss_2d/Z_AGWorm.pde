@@ -58,9 +58,9 @@ class AGWorm extends SuperCreature {
     for (Node n : nodes) n.step();
   }
 
-  void draw() {
+  void draw(color colorCreature) {
     noFill();
-    stroke(255);
+    stroke(colorCreature);
     for (Spring s : springs) {
       line(s.a.x, s.a.y, s.a.z, s.b.x, s.b.y, s.b.z);
     }
@@ -135,4 +135,3 @@ class AGWorm extends SuperCreature {
     }
   }
 }
-

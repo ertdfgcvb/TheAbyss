@@ -45,12 +45,12 @@ class OTFather extends SuperCreature {
   }
 
 
-  void draw() {
+  void draw(color colorCreature) {
     sphereDetail(8);
 
     //TESTA
-    fill(255,100);
-    stroke(255);
+    fill(colorCreature,30);
+    stroke(colorCreature);
     sphere(l);
 
     //ANTENNE
@@ -104,4 +104,3 @@ class OTFather extends SuperCreature {
     }
   }
 }
-

@@ -37,14 +37,14 @@ class MCManta extends SuperCreature {
     applyTransforms();
   }
 
-  void draw() {
+  void draw(color colorCreature) {
 
     sz = 25;
     lgth = 300;
     nb = lgth /sz ;
 
     noFill();
-    stroke(255);
+    stroke(colorCreature);
     rotateY(PI);
 
     //TETE
@@ -91,4 +91,3 @@ class MCManta extends SuperCreature {
     endShape();
   }
 }
-

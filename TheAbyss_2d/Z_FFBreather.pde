@@ -81,8 +81,8 @@ class FFBreather extends SuperCreature {
   }
 
 
-  void draw() {
-    stroke(255,255,255,95);
+  void draw(color colorCreature) {
+    stroke(colorCreature,95);
     noFill();
 
     for(int i = 0; i < points.size()-1;i+=2)
@@ -109,4 +109,3 @@ class FFBreather extends SuperCreature {
     }
   }
 }
-

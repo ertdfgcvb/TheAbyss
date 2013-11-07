@@ -51,7 +51,7 @@ class AGSnakeFish extends SuperCreature {
     mat.set(a);
   }
 
-  void draw() {    
+  void draw(color colorCreature) {    
     dim.mult(constrain(getEnergy() * 0.95,0,1));
 
     PVector p1 = new PVector(); 
@@ -92,4 +92,3 @@ class AGSnakeFish extends SuperCreature {
     rect(-dim.x/2, 0, dim.x, dim.y);
   }
 }
-

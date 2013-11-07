@@ -30,8 +30,8 @@ class AGRadio extends SuperCreature {
     applyTransforms();
   }
 
-  void draw() {  
-    stroke(255);
+  void draw(color colorCreature) {  
+    stroke(colorCreature);
     noFill();
     noStroke();
     hint(DISABLE_DEPTH_TEST); 
@@ -47,13 +47,12 @@ class AGRadio extends SuperCreature {
       float x = c * (rad + len * rad);
       float y = s * (rad + len * rad);
       float z = len * rad;
-      fill(255, i % 2 * 255  ); 
+      fill(colorCreature, i % 2 * 255  ); 
       vertex(x*rFact, y*rFact, z);
-      fill(255, 0); 
+      fill(colorCreature, 0); 
       vertex(x, y, 0);
     }
     endShape();
     hint(ENABLE_DEPTH_TEST);
   }
 }
-

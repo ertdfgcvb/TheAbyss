@@ -81,11 +81,11 @@ class LPHubert extends SuperCreature {
     //    launchMissile();
   }
 
-  void draw() {
+  void draw(color colorCreature) {
 
     strokeWeight(1);
     noFill();
-    stroke(255, 150);
+    stroke(colorCreature, 150);
     float val2 = sin(count*aFreq*3)*2;
     
     float a1 = sin(count*aFreq + bOffs) * angRange;
@@ -124,10 +124,10 @@ class LPHubert extends SuperCreature {
     return new PVector(v.x*c - v.y*s, v.x*s + v.y*c);
   }
 
-  void launchMissile () {
+  void launchMissile (color colorCreature) {
     for (int i=missiles.size()-1; i>=0; i--) {
       Missile d = (Missile)missiles.get(i);
-      d.draw();
+      d.draw(colorCreature);
       if (d.dis <= 23) {
         if (d.target.sca.x <= 0) {
           d.target.kill();
@@ -160,7 +160,7 @@ class LPHubert extends SuperCreature {
       vec.mult(speed);
     }
     //
-    void draw() {
+    void draw(color colorCreature) {
 
       vec = PVector.sub(tar, pos);
       vec.normalize();
@@ -173,11 +173,10 @@ class LPHubert extends SuperCreature {
       pushStyle();
       pushMatrix();
       translate(pos.x, pos.y, pos.z);
-      stroke(255, 0, 0);
+      stroke(colorCreature, 0, 0);
       point(0, 0, 0);
       popMatrix();
       popStyle();
     }
   }
 }
-
