@@ -205,15 +205,7 @@ void stopCamera()
 
 
 
-//camera draw
-void cameraDraw()
-{
-      //void with speed setting
-    float speedRotation = .5 ; // for example 3.0 is very fast, and 0.01 is very slow
-    startCamera(moveScene, moveEye, speedRotation) ;
-    //to change the scene position with the creature position
-    if(gotoTarget) updateCamera(sceneCamera, newTarget, speedMoveOfCamera) ;
-}
+
 
 
 
