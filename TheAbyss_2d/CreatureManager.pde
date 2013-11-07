@@ -58,7 +58,7 @@ class CreatureManager {
 
   public void showCreatureInfo() {
     for (SuperCreature c : creatures) {
-      c.drawInfo();
+      c.drawInfo(c.getPos());
     }
   }
 
@@ -154,9 +154,7 @@ class CreatureManager {
   }
 
   void loop(color colorCreature) {
-    //CAMERA
-    cameraDraw() ;
-    //END CAMERA
+
     
     
     
@@ -177,8 +175,7 @@ class CreatureManager {
       c.postDraw();
     }
     
-    //stop camera
-    stopCamera() ;
+
     
     drawOverlays();
 
@@ -199,11 +196,12 @@ class CreatureManager {
     
 
     //info
-    if (previewCreature != null && showAbyssOrigin) previewCreature.drawInfo();
+    if (previewCreature != null && showAbyssOrigin) for (SuperCreature c : creatures) previewCreature.drawInfo(c.getPos());
 
     if (showCreatureInfo) {
-      for (SuperCreature c : creatures) {      
-        if (c != previewCreature) c.drawInfo();
+      for (SuperCreature c : creatures) {
+        //c.getPos() ;      
+        if (c != previewCreature) c.drawInfo(c.getPos());
       }
     }
 
